@@ -1,2 +1,7 @@
 **/node_modules/
 .vscode/
+*.txt
+*.key
+*.cert
+*.csr
+*.srl
