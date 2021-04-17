@@ -2,9 +2,10 @@
 
 const server = require("fastify")();
 const graphql = require("fastify-gql");
+const path = require("path");
 const fs = require("fs");
 const schema = fs
-  .readFileSync(__dirname + "/../shared/graphql-schema.gql")
+  .readFileSync(path.join(__dirname, "..", "shared", "graphql-schema.gql"))
   .toString();
 
 const HOST = process.env.HOST || "127.0.0.1";
@@ -38,5 +39,5 @@ const resolvers = {
 server
   .register(graphql, { schema, resolvers, graphiql: true })
   .listen(PORT, HOST, () => {
-    console.log(`Producer running at http://${HOST}:${PORT}/graphql`);
+    // console.log(`Producer running at http://${HOST}:${PORT}/graphql`);
   });

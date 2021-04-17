@@ -4,7 +4,7 @@ const path = require("path");
 const cluster = require("cluster");
 
 if (cluster.isMaster) {
-  console.log(`master pid=${process.pid}`);
+  // console.log(`master pid=${process.pid}`);
 
   cluster.setupMaster({
     exec: path.join(__dirname, "cluster-fibonacci.js"),
@@ -17,19 +17,24 @@ if (cluster.isMaster) {
   const HOST = process.env.HOST || "127.0.0.1";
   const PORT = process.env.PORT || 4000;
 
-  const fibonnaci = (limit) => {
+  const fibonacci = (limit) => {
     if (limit < 2) return limit;
-    return fibonnaci(limit - 1) + fibonnaci(limit - 2);
+    return fibonacci(limit - 1) + fibonacci(limit - 2);
   };
 
-  console.log(`worker pid=${process.pid}`);
+  const sleep = (ms) => {
+    return new Promise((resolve, reject) => setTimeout(resolve, ms));
+  };
+
+  // console.log(`worker pid=${process.pid}`);
 
   server.get("/:limit", async (req, reply) => {
+    await sleep(10);
     return String(fibonacci(Number(req.params.limit)));
   });
 
   server.listen(PORT, HOST, () => {
-    console.log(`Producer running at http://${HOST}:${PORT}`);
+    // console.log(`Producer running at http://${HOST}:${PORT}`);
   });
 }
 
@@ -43,5 +48,5 @@ cluster
     cluster.fork();
   })
   .on("listening", (worker, { address, port }) => {
-    console.log(`listening`, worker.id, `${address}:${port}`);
+    // console.log(`listening`, worker.id, `${address}:${port}`);
   });

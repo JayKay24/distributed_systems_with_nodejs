@@ -36,6 +36,6 @@ server.bindAsync(
       throw err;
     }
     server.start();
-    console.log(`Producer running at http://${HOST}:${PORT}`);
+    // console.log(`Producer running at http://${HOST}:${PORT}`);
   }
 );
