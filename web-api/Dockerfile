@@ -28,4 +28,4 @@ COPY . .
 EXPOSE 1337
 ENV HOST 0.0.0.0
 ENV PORT 1337
-CMD [ "node", "producer-http-basic.js" ]
+CMD [ "node", "consumer-http-basic.js" ]

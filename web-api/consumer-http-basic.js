@@ -16,6 +16,10 @@ server.get("/", async () => {
   };
 });
 
+server.get("/hello", async () => "Hello");
+
+server.get("/kill", async () => process.exit(42));
+
 server.listen(PORT, HOST, () => {
-  // console.log(`Consumer running at http://${HOST}:${PORT}`);
+  console.log(`Consumer running at http://${HOST}:${PORT}`);
 });
