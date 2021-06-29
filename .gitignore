@@ -6,3 +6,4 @@
 *.csr
 *.srl
 *.pem
+*.env
